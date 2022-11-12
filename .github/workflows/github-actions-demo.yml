@@ -14,16 +14,16 @@ env:
                                                # containerDefinitions section of your task definition
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Checkout
-        run: docker build -t tistol/docker-react -f Dockerfile.dev .
+  #     - name: Checkout
+  #       run: docker build -t tistol/docker-react -f Dockerfile.dev .
         
-      - name: Tests
-        run: docker run tistol/docker-react npm run test -- --coverage
+  #     - name: Tests
+  #       run: docker run tistol/docker-react npm run test -- --coverage
   
   deploy:
     - name: Build
