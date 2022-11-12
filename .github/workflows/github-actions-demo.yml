@@ -24,7 +24,35 @@ jobs:
         
       - name: Tests
         run: docker run tistol/docker-react npm run test -- --coverage
+  
+  deploy:
+    - name: Build
+      run: docker build -t tistol/docker-react -f Dockerfile .
+    - name: Generate Deployment Package
+      run: zip -r deploy.zip *
+    - name: Get timestamp
+      uses: gerred/actions/current-time@master
+      id: current-time
+        
+    - name: Run string replace
+      uses: frabert/replace-string-action@master
+      id: format-time
+      with:
+        pattern: '[:\.]+'
+        string: "${{ steps.current-time.outputs.time }}"
+        replace-with: '-'
+        flags: 'g'
 
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v14
+      with:
+        aws_access_key: $AWS_ACCESS_KEY
+        aws_secret_key: $AWS_SECRET_KEY
+        application_name: "Demo"
+        environment_name: "Demo-env"
+        version_label: "Demo-${{ steps.format-time.outputs.replaced }}"
+        region: "us-east-2"
+        deployment_package: deploy.zip
 
 
   # deploy:
