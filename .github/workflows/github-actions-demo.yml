@@ -52,8 +52,8 @@ jobs:
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
         with:
-          aws_access_key: "AKIARJ6E2FBXOU7ZVFVX"
-          aws_secret_key: "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"
+          aws_access_key: "AKIARJ6E2FBXM5TYNJOR"
+          aws_secret_key: "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"
           application_name: "Demo"
           environment_name: "Demo-env"
           version_label: "Demo-${{ steps.format-time.outputs.replaced }}"
