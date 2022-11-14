@@ -57,7 +57,7 @@ jobs:
           application_name: "Demo"
           environment_name: "Demo-env-1"
           version_label: "Demo-${{ steps.format-time.outputs.replaced }}"
-          region: "us-east-2"
+          region: "us-east-1"
           deployment_package: deploy.zip
 
 
